@@ -1,0 +1,505 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4fbf7;
+    color: #613188;
+}
+
+/* ENCABEZADO */
+
+header {
+    height: 75px;
+    background: #75c9a5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8%;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #eafff3;
+}
+
+/* SECCIÓN PRINCIPAL */
+
+main {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.inicio {
+    min-height: 430px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 8%;
+}
+
+.texto {
+    max-width: 600px;
+}
+
+.texto h1 {
+    font-size: 48px;
+    line-height: 1.1;
+    color: #245c48;
+    margin-bottom: 20px;
+}
+
+.texto p {
+    font-size: 19px;
+    line-height: 1.6;
+    color: #557267;
+    margin-bottom: 25px;
+}
+
+button {
+    background: #54b88c;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #3d9e76;
+}
+
+/* IMAGEN */
+
+.imagen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circulo {
+    width: 250px;
+    height: 250px;
+    background: #d4f2e2;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 110px;
+    box-shadow: 0 10px 30px rgba(50,120,90,0.15);
+}
+
+/* TARJETAS */
+
+.tarjetas {
+    display: flex;
+    gap: 25px;
+    padding: 20px 8% 60px;
+}
+
+.tarjeta {
+    flex: 1;
+    background: white;
+    padding: 28px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.tarjeta:hover {
+    transform: translateY(-5px);
+}
+
+.tarjeta span {
+    font-size: 38px;
+}
+
+.tarjeta h2 {
+    margin: 12px 0;
+    color: #348260;
+}
+
+.tarjeta p {
+    color: #667d73;
+    line-height: 1.5;
+}
+
+/* PIE DE PÁGINA */
+
+footer {
+    text-align: center;
+    background: #75c9a5;
+    color: white;
+    padding: 20px;
+    font-weight: bold;
+}
+
+/* CELULARES */
+
+@media (max-width: 800px) {
+
+    header {
+        height: auto;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .inicio {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .texto h1 {
+        font-size: 36px;
+    }
+
+    .tarjetas {
+        flex-direction: column;
+    }
+}
+.circulo {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(50, 120, 90, 0.15);
+}
+
+.circulo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+/* =====================================
+   CONFIGURACIÓN GENERAL
+===================================== */
+
+body {
+    margin: 0;
+    background-color: #eef4ff;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =====================================
+   ENCABEZADO
+===================================== */
+
+header {
+    height: 65px;
+
+    background-color: #2868d8;
+
+    margin: 26px 24px 0 24px;
+    padding: 0 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: white;
+}
+
+
+/* Nombre de la página */
+
+header h2 {
+    margin: 0;
+    font-size: 25px;
+}
+
+
+/* Menú */
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+/* =====================================
+   TÍTULO PRINCIPAL
+===================================== */
+
+h1 {
+    text-align: center;
+
+    color: #0755a5;
+
+    font-size: 35px;
+
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+
+/* =====================================
+   CONTENEDOR PRINCIPAL
+===================================== */
+
+.contenedor-principal {
+
+    width: 90%;
+
+    margin: auto;
+
+    min-height: 500px;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+/* =====================================
+   OCULTAR LOS RADIO BUTTONS
+===================================== */
+
+.contenedor-principal > input {
+    display: none;
+}
+
+
+/* =====================================
+   BOTONES
+===================================== */
+
+.botones {
+
+    width: 220px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+/* Apariencia de los botones */
+
+.botones label {
+
+    width: 200px;
+    height: 55px;
+
+    background-color: #087df5;
+
+    color: white;
+
+    border-radius: 9px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+/* Efecto al pasar el mouse */
+
+.botones label:hover {
+
+    background-color: #075fc2;
+
+    transform: scale(1.03);
+}
+
+
+/* =====================================
+   CONTENEDOR DE LAS IMÁGENES
+===================================== */
+
+#contenedor {
+
+    flex: 1;
+
+    min-height: 450px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* =====================================
+   IMÁGENES
+===================================== */
+
+/* Todas empiezan ocultas */
+
+#contenedor img {
+
+    display: none;
+
+    width: 470px;
+
+    max-width: 90%;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.20);
+}
+
+
+/* =====================================
+   MOSTRAR LAS IMÁGENES
+===================================== */
+
+
+/* Imagen 1 */
+
+#imagen1:checked ~ #contenedor #img1 {
+    display: block;
+}
+
+
+/* Imagen 2 */
+
+#imagen2:checked ~ #contenedor #img2 {
+    display: block;
+}
+
+
+/* Imagen 3 */
+
+#imagen3:checked ~ #contenedor #img3 {
+    display: block;
+}
+
+
+/* Imagen 4 */
+
+#imagen4:checked ~ #contenedor #img4 {
+    display: block;
+}
+
+
+/* Imagen 5 */
+
+#imagen5:checked ~ #contenedor #img5 {
+    display: block;
+}
+
+
+/* Imagen 6 */
+
+#imagen6:checked ~ #contenedor #img6 {
+    display: block;
+}
+
+
+/* =====================================
+   VERSIÓN PARA CELULAR
+===================================== */
+
+@media (max-width: 700px) {
+
+    header {
+        margin: 15px 10px 0 10px;
+        padding: 0 20px;
+    }
+
+
+    header h2 {
+        font-size: 20px;
+    }
+
+
+    nav {
+        display: none;
+    }
+
+
+    h1 {
+        font-size: 27px;
+
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+
+    .contenedor-principal {
+
+        width: 95%;
+
+        flex-direction: column;
+
+        gap: 30px;
+    }
+
+
+    .botones {
+
+        width: 100%;
+
+        align-items: center;
+    }
+
+
+    #contenedor {
+
+        width: 100%;
+
+        min-height: 300px;
+    }
+
+
+    #contenedor img {
+
+        width: 90%;
+    }
+
+}
