@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Misión: Bienestar académico</title>
+<style>
+:root{--ink:#26334a;--pink:#ffd8e7;--lav:#dedcff;--mint:#c8f2df;--yellow:#ffe7a8;--blue:#cce8ff}
+*{box-sizing:border-box}body{margin:0;background:#f7f5ff;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1000px;margin:auto;padding:16px}.top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+h1{font-size:clamp(1.35rem,4vw,2rem);margin:4px 0}p{margin:6px 0}.stats{display:flex;gap:8px;flex-wrap:wrap}.pill{background:white;border:2px solid #e7e4f5;border-radius:999px;padding:8px 12px;font-weight:700}
+.game-wrap{position:relative;margin-top:12px;background:white;border:3px solid #e4e0f3;border-radius:20px;overflow:hidden;box-shadow:0 8px 24px #27324a12}
+canvas{display:block;width:100%;height:auto;background:#dff5e8;touch-action:none}
+.overlay{position:absolute;inset:0;background:#fffaf0ed;display:flex;align-items:center;justify-content:center;padding:18px;text-align:center}
+.panel{max-width:520px;background:white;border:3px solid #e7e1f5;border-radius:22px;padding:22px;box-shadow:0 8px 24px #27324a12}
+.panel h2{margin:0 0 8px;font-size:1.7rem}.panel p{line-height:1.5}
+button{font:inherit;font-weight:800;border:0;border-radius:14px;padding:11px 16px;background:#7867d9;color:white;cursor:pointer;box-shadow:0 3px 0 #5144a6}
+button:focus-visible{outline:3px solid #27324a;outline-offset:3px}button:active{transform:translateY(2px);box-shadow:0 1px 0 #5144a6}
+.secondary{background:#e9e5ff;color:#3c3477;box-shadow:0 3px 0 #c5bdf3}.controls{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;padding:12px}
+.dpad{display:grid;grid-template-columns:44px 44px 44px;grid-template-rows:40px 40px 40px;gap:4px}.dpad button{padding:4px;border-radius:10px}.dpad .up{grid-column:2}.dpad .left{grid-column:1;grid-row:2}.dpad .down{grid-column:2;grid-row:2}.dpad .right{grid-column:3;grid-row:2}
+.hint{font-size:.92rem;opacity:.85}.challenge{margin-top:12px;background:white;border:2px solid #e7e4f5;border-radius:18px;padding:16px;display:none}.challenge h2{margin:0 0 6px}.answers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.answers button{background:#e9f8f0;color:#244f40;box-shadow:0 3px 0 #a8d8c3;text-align:left}.answers button:hover{filter:brightness(.97)}
+.notice{min-height:28px;font-weight:700;padding:0 4px}.legend{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 0}.legend span{background:#fff;border-radius:10px;padding:6px 9px;font-size:.9rem}
+@media(max-width:560px){main{padding:10px}.panel{padding:16px}.panel h2{font-size:1.4rem}.controls{justify-content:center}.hint{text-align:center}}
+</style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <div><h1>🌈 Misión: Bienestar académico</h1><p>Explora el campus, recoge herramientas y resuelve retos de estudio.</p></div>
+    <div class="stats">
+      <div class="pill">💚 Bienestar: <span id="wellbeing">3</span>/5</div>
+      <div class="pill">✨ Herramientas: <span id="items">0</span>/5</div>
+      <div class="pill">🎯 Retos: <span id="challenges">0</span>/3</div>
+    </div>
+  </div>
+  <div class="game-wrap">
+    <canvas id="game" width="900" height="540" aria-label="Mapa del campus del juego"></canvas>
+    <div class="overlay" id="startOverlay">
+      <div class="panel">
+        <h2>¡Tu aventura comienza aquí! 🎒</h2>
+        <p>Ayuda a Alex a recorrer el campus y practicar hábitos saludables frente al estrés académico.</p>
+        <p><b>Cómo jugar:</b> usa las flechas o WASD para moverte. Acércate a los objetos brillantes y a las estaciones para interactuar.</p>
+        <button id="startBtn">▶ Jugar</button>
+      </div>
+    </div>
+    <div class="overlay" id="endOverlay" style="display:none">
+      <div class="panel">
+        <h2 id="endTitle">¡Misión completada! 🎉</h2>
+        <p id="endText">Has practicado herramientas para cuidar tu bienestar.</p>
+        <button id="restartBtn">↻ Jugar de nuevo</button>
+      </div>
+    </div>
+  </div>
+  <div class="controls">
+    <div class="dpad" aria-label="Controles táctiles">
+      <button class="up" data-move="up" aria-label="Arriba">▲</button>
+      <button class="left" data-move="left" aria-label="Izquierda">◀</button>
+      <button class="down" data-move="down" aria-label="Abajo">▼</button>
+      <button class="right" data-move="right" aria-label="Derecha">▶</button>
+    </div>
+    <div><p class="hint"><b>Teclado:</b> flechas o WASD · <b>Interactuar:</b> espacio o botón de acción</p><button id="actionBtn" class="secondary">✨ Interactuar</button></div>
+  </div>
+  <div class="notice" id="notice" role="status">Pulsa “Jugar” para empezar.</div>
+  <div class="legend"><span>🟡 Herramienta brillante = recoger</span><span>🟣 Estación = reto</span><span>Acércate y pulsa Interactuar</span></div>
+  <section class="challenge" id="challengeBox">
+    <h2 id="challengeTitle">Reto</h2><p id="challengeText"></p><div class="answers" id="answers"></div>
+  </section>
+</main>
+<script>
+(() => {
+'use strict';
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+const $ = id => document.getElementById(id);
+const W = canvas.width, H = canvas.height;
+const player = {x:95,y:105,r:15,speed:3.2};
+const tools = [
+ {x:220,y:120,emoji:'🌬️',name:'Respirar con calma',desc:'Respira lento un momento antes de seguir.'},
+ {x:445,y:105,emoji:'🗓️',name:'Planificar',desc:'Divide una tarea grande en pasos pequeños.'},
+ {x:740,y:160,emoji:'☕',name:'Tomar una pausa',desc:'Descansar brevemente ayuda a recuperar atención.'},
+ {x:240,y:420,emoji:'📵',name:'Desconectarse',desc:'Aparta las distracciones durante un bloque de estudio.'},
+ {x:690,y:420,emoji:'⭐',name:'Reconocer avances',desc:'Valora lo que ya lograste, aunque sea pequeño.'}
+].map(t=>({...t,collected:false}));
+const stations = [
+ {x:365,y:260,title:'Reto 1: Muchas tareas',text:'Tienes varias entregas para la misma semana. ¿Qué te puede ayudar?',answers:[
+  {label:'Hacer una lista y priorizar por fecha e importancia',good:true,feedback:'¡Bien! Priorizar hace que las tareas parezcan más manejables.'},
+  {label:'Intentar hacerlo todo a la vez',good:false,feedback:'Hacer muchas cosas a la vez puede aumentar la sensación de agobio.'}
+ ]},
+ {x:585,y:280,title:'Reto 2: Prepararse para un examen',text:'El examen se acerca y te sientes bajo presión. ¿Qué opción es más útil?',answers:[
+  {label:'Estudiar en bloques con pausas y practicar preguntas',good:true,feedback:'¡Exacto! Los bloques de estudio y las pausas favorecen el aprendizaje.'},
+  {label:'No dormir para estudiar toda la noche',good:false,feedback:'Dormir también es parte de prepararse; el descanso ayuda a la memoria.'}
+ ]},
+ {x:455,y:440,title:'Reto 3: Necesito apoyo',text:'Un tema no te queda claro y te preocupa atrasarte. ¿Qué haces?',answers:[
+  {label:'Preguntar al docente o estudiar con alguien de confianza',good:true,feedback:'¡Buena decisión! Pedir apoyo es una habilidad, no un fracaso.'},
+  {label:'Quedarme callado y preocuparme a solas',good:false,feedback:'Pedir ayuda temprano puede evitar que la preocupación crezca.'}
+ ]}
+].map(s=>({...s,done:false}));
+let started=false, ended=false, wellbeing=3, activeChallenge=null, keys=new Set(), lastTime=0;
+const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+function updateStats(){
+ $('wellbeing').textContent=wellbeing;
+ $('items').textContent=tools.filter(t=>t.collected).length;
+ $('challenges').textContent=stations.filter(s=>s.done).length;
+}
+function say(text){$('notice').textContent=text;}
+function drawPath(x1,y1,x2,y2,width=54){
+ ctx.strokeStyle='#f7e4c7';ctx.lineWidth=width;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+ ctx.strokeStyle='#fff4df';ctx.lineWidth=width-12;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+}
+function draw(){
+ ctx.clearRect(0,0,W,H);
+ // grassy campus background
+ ctx.fillStyle='#dff4df';ctx.fillRect(0,0,W,H);
+ // decorative garden dots
+ for(let i=0;i<55;i++){let x=(i*137+37)%W,y=(i*83+25)%H;ctx.fillStyle=i%2?'#b8e5bf':'#c7edca';ctx.beginPath();ctx.arc(x,y,3+(i%3),0,Math.PI*2);ctx.fill();}
+ // paths connecting the campus
+ drawPath(65,275,835,275,62);drawPath(450,45,450,500,58);drawPath(95,105,220,120,28);
+ // campus buildings
+ const buildings=[
+  {x:30,y:28,w:160,h:105,c:'#ffd7e4',label:'BIBLIOTECA',emoji:'📚'},
+  {x:340,y:30,w:205,h:90,c:'#d7d4ff',label:'AULAS',emoji:'🏫'},
+  {x:700,y:35,w:165,h:100,c:'#ffe5a9',label:'CAFETERÍA',emoji:'🥪'},
+  {x:40,y:355,w:155,h:115,c:'#cce8ff',label:'JARDÍN',emoji:'🌼'},
+  {x:705,y:355,w:155,h:115,c:'#f8d5bd',label:'DESCANSO',emoji:'🪴'}
+ ];
+ buildings.forEach(b=>{ctx.fillStyle='#b4c9b7';ctx.fillRect(b.x+5,b.y+7,b.w,b.h);ctx.fillStyle=b.c;ctx.fillRect(b.x,b.y,b.w,b.h);ctx.strokeStyle='#fff';ctx.lineWidth=4;ctx.strokeRect(b.x+2,b.y+2,b.w-4,b.h-4);ctx.font='26px sans-serif';ctx.textAlign='center';ctx.fillText(b.emoji,b.x+b.w/2,b.y+40);ctx.fillStyle='#35405b';ctx.font='bold 12px system-ui';ctx.fillText(b.label,b.x+b.w/2,b.y+b.h-15);});
+ // tools
+ tools.forEach(t=>{if(t.collected)return;ctx.save();ctx.shadowColor='#ffd75d';ctx.shadowBlur=20;ctx.fillStyle='#fff0a8';ctx.beginPath();ctx.arc(t.x,t.y,22,0,Math.PI*2);ctx.fill();ctx.restore();ctx.font='26px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(t.emoji,t.x,t.y);});
+ // stations
+ stations.forEach((s,i)=>{ctx.fillStyle=s.done?'#b9ebd1':'#d9d3ff';ctx.beginPath();ctx.arc(s.x,s.y,24,0,Math.PI*2);ctx.fill();ctx.strokeStyle=s.done?'#4d9c77':'#7968ce';ctx.lineWidth=3;ctx.stroke();ctx.font='bold 16px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#40366f';ctx.fillText(s.done?'✓':String(i+1),s.x,s.y);});
+ // player shadow and Alex
+ ctx.fillStyle='#64748b33';ctx.beginPath();ctx.ellipse(player.x,player.y+16,15,6,0,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#f4c7a1';ctx.beginPath();ctx.arc(player.x,player.y-5,11,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#604438';ctx.beginPath();ctx.arc(player.x,player.y-9,11,Math.PI,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#7d72d8';ctx.fillRect(player.x-10,player.y+5,20,19);
+ ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(player.x-4,player.y-5,1.5,0,Math.PI*2);ctx.arc(player.x+4,player.y-5,1.5,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#26334a';ctx.font='bold 12px system-ui';ctx.textAlign='center';ctx.fillText('Alex',player.x,player.y+38);
+ // proximity prompt
+ const near=getNearby();
+ if(started&&!ended&&near){ctx.fillStyle='#fff';ctx.strokeStyle='#7b6ad7';ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(clamp(player.x-100,5,W-205),clamp(player.y-67,5,H-35),200,29,12);ctx.fill();ctx.stroke();ctx.fillStyle='#40366f';ctx.font='bold 12px system-ui';ctx.fillText('Pulsa ESPACIO / Interactuar',clamp(player.x,105,W-105),clamp(player.y-49,19,H-20));}
+}
+function getNearby(){
+ for(const t of tools)if(!t.collected&&Math.hypot(player.x-t.x,player.y-t.y)<48)return {type:'tool',obj:t};
+ for(const s of stations)if(!s.done&&Math.hypot(player.x-s.x,player.y-s.y)<52)return {type:'station',obj:s};
+ return null;
+}
+function interact(){
+ if(!started||ended)return;
+ if(activeChallenge)return;
+ const near=getNearby();
+ if(!near){say('Explora el campus y acércate a una herramienta brillante o a una estación morada.');return;}
+ if(near.type==='tool'){
+  near.obj.collected=true;wellbeing=Math.min(5,wellbeing+0.4);updateStats();
+  say('✨ Recogiste: '+near.obj.name+'. '+near.obj.desc);checkWin();
+ }else{
+  activeChallenge=near.obj;
+  $('challengeTitle').textContent=near.obj.title;
+  $('challengeText').textContent=near.obj.text;
+  const box=$('answers');box.innerHTML='';
+  near.obj.answers.forEach(a=>{const b=document.createElement('button');b.textContent=a.label;b.addEventListener('click',()=>answer(a));box.appendChild(b);});
+  $('challengeBox').style.display='block';
+  say('Elige una respuesta para completar el reto.');
+ }
+}
+function answer(a){
+ if(!activeChallenge)return;
+ const s=activeChallenge;s.done=true;
+ if(a.good)wellbeing=Math.min(5,wellbeing+0.7);else wellbeing=Math.max(0,wellbeing-0.5);
+ updateStats();say(a.feedback);
+ $('challengeBox').style.display='none';activeChallenge=null;checkWin();
+}
+function checkWin(){
+ const all=tools.every(t=>t.collected)&&stations.every(s=>s.done);
+ if(all){ended=true;$('endTitle').textContent='¡Misión completada! 🎉';$('endText').textContent='Recogiste las 5 herramientas y resolviste los 3 retos. Recuerda: puedes avanzar paso a paso y pedir apoyo cuando lo necesites.';$('endOverlay').style.display='flex';}
+}
+function start(){started=true;ended=false;$('startOverlay').style.display='none';say('¡Vamos! Muévete por el campus.');}
+function reset(){
+ player.x=95;player.y=160;tools.forEach(t=>t.collected=false);stations.forEach(s=>s.done=false);
+ wellbeing=3;activeChallenge=null;keys.clear();started=true;ended=false;
+ $('challengeBox').style.display='none';$('endOverlay').style.display='none';$('startOverlay').style.display='none';updateStats();say('¡Nueva partida! Explora el campus.');draw();
+}
+function move(dx,dy){
+ if(!started||ended||activeChallenge)return;
+ player.x=clamp(player.x+dx,18,W-18);player.y=clamp(player.y+dy,18,H-18);
+}
+function frame(ts){
+ const dt=Math.min((ts-lastTime)/16.67||1,2);lastTime=ts;
+ if(started&&!ended&&!activeChallenge){
+  let dx=0,dy=0;
+  if(keys.has('ArrowLeft')||keys.has('a'))dx--;if(keys.has('ArrowRight')||keys.has('d'))dx++;
+  if(keys.has('ArrowUp')||keys.has('w'))dy--;if(keys.has('ArrowDown')||keys.has('s'))dy++;
+  if(dx&&dy){dx*=.707;dy*=.707}
+  move(dx*player.speed*dt,dy*player.speed*dt);
+ }
+ draw();requestAnimationFrame(frame);
+}
+window.addEventListener('keydown',e=>{
+ const k=e.key.length===1?e.key.toLowerCase():e.key;
+ if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' '].includes(e.key))e.preventDefault();
+ if(k===' '||k==='Enter'){if(started&&!ended)interact();return;}
+ keys.add(k);
+});
+window.addEventListener('keyup',e=>{const k=e.key.length===1?e.key.toLowerCase():e.key;keys.delete(k)});
+document.querySelectorAll('[data-move]').forEach(btn=>{
+ const direction=btn.dataset.move;const map={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
+ const startMove=e=>{e.preventDefault();const [dx,dy]=map[direction];move(dx*player.speed*2,dy*player.speed*2);};
+ btn.addEventListener('click',startMove);
+ let hold=null;
+ btn.addEventListener('pointerdown',e=>{e.preventDefault();const keyMap={up:'ArrowUp',down:'ArrowDown',left:'ArrowLeft',right:'ArrowRight'};keys.add(keyMap[direction]);btn.setPointerCapture?.(e.pointerId);});
+ const release=()=>{const keyMap={up:'ArrowUp',down:'ArrowDown',left:'ArrowLeft',right:'ArrowRight'};keys.delete(keyMap[direction]);};
+ btn.addEventListener('pointerup',release);btn.addEventListener('pointercancel',release);btn.addEventListener('lostpointercapture',release);
+});
+$('startBtn').addEventListener('click',start);
+$('restartBtn').addEventListener('click',reset);
+$('actionBtn').addEventListener('click',interact);
+updateStats();draw();requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

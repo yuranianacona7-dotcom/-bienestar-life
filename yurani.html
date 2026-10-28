@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,112 +9,440 @@
 </head>
 
 <body>
-
     <header>
-        <div class="logo">💚 Bienestar Emocional</div>
+        <a class="logo" href="#inicio" onclick="mostrarSeccion('inicio')">
+            💚 Bienestar Emocional
+        </a>
 
         <nav>
-            <a href="">Inicio</a>
-            <a href="lulu.html">nosotros</a>
-            <a href="">ST</a>
-            <a href=""></a>
+            <a href="#inicio" onclick="mostrarSeccion('inicio')">Inicio</a>
+
+            <div class="menu">
+                <a href="#nosotros" onclick="mostrarSeccion('nosotros')">
+                    Nosotros ▾
+                </a>
+
+                <div class="submenu">
+                    <a href="#mision" onclick="mostrarSeccion('mision')">Misión</a>
+                    <a href="#vision" onclick="mostrarSeccion('vision')">Visión</a>
+                    <a href="#objetivo-general" onclick="mostrarSeccion('objetivo-general')">Objetivos generales</a>
+                    <a href="#objetivos-especificos" onclick="mostrarSeccion('objetivos-especificos')">Objetivos específicos</a>
+                    <a href="#quienes" onclick="mostrarSeccion('quienes')">Quiénes somos</a>
+                    <a href="#cronograma" onclick="mostrarSeccion('cronograma')">Cronograma</a>
+                    <a href="#hojas-vida" onclick="mostrarSeccion('hojas-vida')">Hojas de vida</a>
+                    <a href="#pregunta-problema" onclick="mostrarSeccion('pregunta-problema')">Pregunta problema</a>
+                    <a href="#resumen" onclick="mostrarSeccion('resumen')">Resumen del proyecto</a>
+                </div>
+            </div>
+
+            <div class="menu">
+                <a href="#solucion-menu" onclick="mostrarSeccion('nosotros')">
+                    Solución tecnológica ▾
+                </a>
+
+                <div class="submenu">
+                    <a href="#evidencias" onclick="mostrarSeccion('evidencias')">Evidencias</a>
+                    <a href="#app" onclick="mostrarSeccion('app')">App</a>
+                    <a href="#solucion" onclick="mostrarSeccion('solucion')">Solución tecnológica</a>
+                </div>
+            </div>
+
+            <a href="#contacto" onclick="mostrarSeccion('contacto')">Contacto</a>
         </nav>
     </header>
 
     <main>
 
-        <section class="inicio">
-            <div class="texto">
-                <h1>BIENESTAR EMOCIONAL<br>Y AUTOCUIDADO</h1>
+        <section class="apartado activo" id="inicio">
+            <div class="inicio">
+                <div class="texto">
+                    <div class="banner-inicio">
+                        <img src="banner.gif" alt="Bienestar emocional y autocuidado">
+                    </div>
 
-                <p>
-                    Un espacio para aprender a cuidar tus emociones,
-                    fortalecer tu autoestima y mejorar tu bienestar.
-                </p>
+                    <p>
+                        Un espacio para aprender a cuidar tus emociones,
+                        fortalecer tu autoestima y mejorar tu bienestar.
+                    </p>
 
-                <button>Conoce más</button>
+                    <button onclick="mostrarSeccion('nosotros')">
+                        Conoce más
+                    </button>
+                </div>
+
+                <div class="imagen">
+                    <div class="circulo">
+                        <img src="dibujo.jpeg" alt="Bienestar emocional">
+                    </div>
+                </div>
             </div>
 
-            <div class="imagen">
-                <div class="circulo">
-                    <img src="dibujo.jpeg">
-                    
+            <div class="tarjetas">
+                <button class="tarjeta" onclick="mostrarSeccion('mision')">
+                    <span>💗</span>
+                    <h2>Misión</h2>
+                    <p>Conoce el propósito de nuestro proyecto.</p>
+                </button>
+
+                <button class="tarjeta" onclick="mostrarSeccion('vision')">
+                    <span>😊</span>
+                    <h2>Visión</h2>
+                    <p>Descubre lo que buscamos alcanzar.</p>
+                </button>
+
+                <button class="tarjeta" onclick="mostrarSeccion('objetivo-general')">
+                    <span>🌱</span>
+                    <h2>Objetivos</h2>
+                    <p>Conoce los objetivos del proyecto.</p>
+                </button>
+            </div>
+
+       
+            <div class="video-inicio">
+                <h1>🎬 Conoce nuestro proyecto</h1>
+
+                <p>
+                    Descubre más sobre el bienestar emocional,
+                    el autocuidado y la importancia de cuidar nuestras emociones.
+                </p>
+
+                <div class="marco-video">
+                    <video controls preload="metadata" playsinline>
+                        <source src="video.mp4" type="video/mp4">
+                        Tu navegador no puede reproducir este video.
+                        Puedes abrirlo directamente desde la carpeta del proyecto.
+                    </video>
                 </div>
             </div>
         </section>
 
-        <section class="tarjetas">
+       
+        <section class="apartado" id="nosotros">
+            <h1>NOSOTROS</h1>
 
-            <div class="tarjeta">
-                <span>💗</span>
-                <h2>Autoestima</h2>
+            <div class="panel">
+                <img class="imagen-nosotros"
+                     src="dibujo.jpeg"
+                     alt="Bienestar emocional">
+
                 <p>
-                    Aprende a valorarte, reconocer tus cualidades
-                    y confiar más en ti.
+                    Somos un proyecto educativo dedicado al bienestar emocional
+                    y al autocuidado. Buscamos promover el reconocimiento de las
+                    emociones, el respeto por uno mismo y hábitos saludables
+                    para el cuidado personal.
+                </p>
+
+                <h2 class="subtitulo">Explora nuestro proyecto</h2>
+
+                <p>
+                    Selecciona cualquiera de los siguientes apartados
+                    para conocer más sobre nuestro trabajo.
+                </p>
+
+                <div class="botones-seccion">
+                    <button onclick="mostrarSeccion('mision')">💗 Misión</button>
+                    <button onclick="mostrarSeccion('vision')">😊 Visión</button>
+                    <button onclick="mostrarSeccion('objetivo-general')">🌱 Objetivos generales</button>
+                    <button onclick="mostrarSeccion('objetivos-especificos')">📋 Objetivos específicos</button>
+                    <button onclick="mostrarSeccion('quienes')">👥 Quiénes somos</button>
+                    <button onclick="mostrarSeccion('cronograma')">📅 Cronograma</button>
+                    <button onclick="mostrarSeccion('hojas-vida')">📄 Hojas de vida</button>
+                    <button onclick="mostrarSeccion('pregunta-problema')">❓ Pregunta problema</button>
+                    <button onclick="mostrarSeccion('resumen')">📘 Resumen del proyecto</button>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="apartado" id="mision">
+            <h1>MISIÓN</h1>
+
+            <div class="panel">
+                <img src="mision.png" alt="Misión del proyecto">
+            </div>
+        </section>
+
+        <!-- VISIÓN -->
+        <section class="apartado" id="vision">
+            <h1>VISIÓN</h1>
+
+            <div class="panel">
+                <img src="vision.png" alt="Visión del proyecto">
+            </div>
+        </section>
+
+      
+        <section class="apartado" id="objetivo-general">
+            <h1>OBJETIVOS GENERALES</h1>
+
+            <div class="panel">
+                <img src="obj general.png" alt="Objetivo general">
+            </div>
+        </section>
+
+        <section class="apartado" id="objetivos-especificos">
+            <h1>OBJETIVOS ESPECÍFICOS</h1>
+
+            <div class="panel">
+                <img src="obj especificos.png" alt="Objetivos específicos">
+            </div>
+        </section>
+
+      
+        <section class="apartado" id="quienes">
+            <h1>QUIÉNES SOMOS</h1>
+
+            <div class="panel">
+                <img class="imagen-nosotros"
+                     src="dibujo.jpeg"
+                     alt="Bienestar emocional">
+
+                <p>
+                    Nuestro proyecto busca compartir información y recursos
+                    que ayuden a reconocer las emociones, fortalecer la
+                    autoestima y practicar el autocuidado.
                 </p>
             </div>
+        </section>
 
-            <div class="tarjeta">
-                <span>😊</span>
-                <h2>Mis emociones</h2>
+       
+        <section class="apartado" id="cronograma">
+            <h1>CRONOGRAMA</h1>
+
+            <div class="panel">
+                <img src="crono.gif" alt="Cronograma del proyecto">
+            </div>
+        </section>
+
+
+        <section class="apartado" id="hojas-vida">
+            <h1>HOJAS DE VIDA</h1>
+
+            <div class="hojas">
+                <div class="panel">
+                    <img src="hoja1.png" alt="Hoja de vida 1">
+                </div>
+
+                <div class="panel">
+                    <img src="hoja2.png" alt="Hoja de vida 2">
+                </div>
+            </div>
+        </section>
+
+   
+        <section class="apartado" id="pregunta-problema">
+            <h1>PREGUNTA PROBLEMA</h1>
+
+            <div class="panel panel-documento">
                 <p>
-                    Reconoce lo que sientes y encuentra formas
-                    saludables de expresarlo.
+                    Esta es la pregunta problema que orienta
+                    nuestro proyecto de bienestar emocional.
                 </p>
+
+                <img class="imagen-pregunta"
+                     src="PREGUNTA PROBLEMA.png"
+                     alt="Pregunta problema del proyecto">
+
+                <button onclick="mostrarSeccion('nosotros')">
+                    Volver a Nosotros
+                </button>
+            </div>
+        </section>
+
+      
+        <section class="apartado" id="resumen">
+            <h1>RESUMEN DEL PROYECTO</h1>
+
+            <div class="panel panel-documento">
+                <div class="icono-documento">📘</div>
+
+                <h2>Resumen de Bienestar Emocional</h2>
+
+                <p>
+                    En este apartado puedes consultar el documento Word
+                    que contiene el resumen de nuestro proyecto.
+                </p>
+
+                <p>
+                    Selecciona una opción para abrir el archivo o descargarlo.
+                </p>
+
+                <div class="acciones-documento">
+                    <a class="boton"
+                       href="trabajo.docx"
+                       target="_blank"
+                       rel="noopener">
+                        📄 Abrir documento Word
+                    </a>
+
+                    <a class="boton boton-secundario"
+                       href="trabajo.docx"
+                       download>
+                        ⬇ Descargar resumen
+                    </a>
+                </div>
+
+                <p class="nota-documento">
+                    Si el documento no se visualiza directamente en el navegador,
+                    descárgalo y ábrelo con Microsoft Word o un programa compatible.
+                </p>
+
+                <button onclick="mostrarSeccion('nosotros')">
+                    Volver a Nosotros
+                </button>
+            </div>
+        </section>
+
+ 
+        <section class="apartado" id="evidencias">
+            <h1>EVIDENCIAS</h1>
+
+            <div class="banner">
+                <img src="evbanner.jpeg" alt="Banner de evidencias">
             </div>
 
-            <div class="tarjeta">
-                <span>🌱</span>
-                <h2>Autocuidado</h2>
-                <p>
-                    Dedica tiempo para cuidar tu mente, tu cuerpo
-                    y tus necesidades.
-                </p>
+            <div class="galeria">
+                <a href="ev1.jpeg" target="_blank" rel="noopener">
+                    <img src="ev1.jpeg" alt="Evidencia 1">
+                    <span>Evidencia 1</span>
+                </a>
+
+                <a href="ev2.jpeg" target="_blank" rel="noopener">
+                    <img src="ev2.jpeg" alt="Evidencia 2">
+                    <span>Evidencia 2</span>
+                </a>
+
+                <a href="ev3.jpeg" target="_blank" rel="noopener">
+                    <img src="ev3.jpeg" alt="Evidencia 3">
+                    <span>Evidencia 3</span>
+                </a>
+
+                <a href="ev4.jpeg" target="_blank" rel="noopener">
+                    <img src="ev4.jpeg" alt="Evidencia 4">
+                    <span>Evidencia 4</span>
+                </a>
+
+                <a href="ev5.jpeg" target="_blank" rel="noopener">
+                    <img src="ev5.jpeg" alt="Evidencia 5">
+                    <span>Evidencia 5</span>
+                </a>
+
+                <a href="ev6.jpeg" target="_blank" rel="noopener">
+                    <img src="ev6.jpeg" alt="Evidencia 6">
+                    <span>Evidencia 6</span>
+                </a>
+
+                <a href="ev7.jpeg" target="_blank" rel="noopener">
+                    <img src="ev7.jpeg" alt="Evidencia 7">
+                    <span>Evidencia 7</span>
+                </a>
+
+                <a href="ev8.jpeg" target="_blank" rel="noopener">
+                    <img src="ev8.jpeg" alt="Evidencia 8">
+                    <span>Evidencia 8</span>
+                </a>
+
+                <a href="ev9.jpeg" target="_blank" rel="noopener">
+                    <img src="ev9.jpeg" alt="Evidencia 9">
+                    <span>Evidencia 9</span>
+                </a>
+
+                <a href="ev10.jpeg" target="_blank" rel="noopener">
+                    <img src="ev10.jpeg" alt="Evidencia 10">
+                    <span>Evidencia 10</span>
+                </a>
+            </div>
+        </section>
+
+
+        <section class="apartado" id="app">
+            <h1>APP DE BIENESTAR EMOCIONAL</h1>
+
+            <div class="marco-app">
+                <iframe src="juego.html"
+                        title="Aplicación de bienestar emocional">
+                </iframe>
             </div>
 
+            <p class="texto-centro">
+                Explora nuestra aplicación de bienestar emocional.
+            </p>
+
+            <a class="boton"
+               href="juego.html"
+               target="_blank"
+               rel="noopener">
+                Abrir app en otra pestaña
+            </a>
+        </section>
+
+        <!-- SOLUCIÓN TECNOLÓGICA -->
+        <section class="apartado" id="solucion">
+            <h1>SOLUCIÓN TECNOLÓGICA</h1>
+
+            <div class="banner">
+                <img src="evsoltec.jpeg" alt="Banner de solución tecnológica">
+            </div>
+
+            <div class="panel">
+                <p>
+                    Conoce nuestra propuesta tecnológica relacionada
+                    con el bienestar emocional y el autocuidado.
+                </p>
+
+                <button onclick="mostrarSeccion('app')">
+                    Ir a la app
+                </button>
+            </div>
+        </section>
+
+        <!-- CONTACTO -->
+        <section class="apartado" id="contacto">
+            <h1>CONTACTO</h1>
+
+            <div class="panel">
+                <p>
+                    Gracias por visitar nuestro proyecto de bienestar emocional.
+                </p>
+
+                <p>
+                    Esperamos que este espacio te ayude a aprender más sobre
+                    tus emociones y la importancia del autocuidado.
+                </p>
+
+                <button onclick="mostrarSeccion('inicio')">
+                    Volver al inicio
+                </button>
+            </div>
         </section>
 
     </main>
 
     <footer>
         <p>💚 Cuidar de ti también es una forma de quererte.</p>
+
+        <a href="#inicio" onclick="mostrarSeccion('inicio')">
+            Volver al inicio ↑
+        </a>
     </footer>
-    <div class="imagen">
-        <div class="circulo">
-            🧘‍♀️
-        </div>
-    </div>
-    <div class="imagen">
-        <div class="circulo">
-            <img src="bienestar.jpg" alt="Bienestar emocional">
-        </div>
-    </div>
-    <section class="mision">
-        <h2>MISIÓN</h2>
-    
-        <div class="mision-contenido">
-            <img src="mision.jpg" alt="Misión de bienestar emocional">
-    
-            <p>
-                Promover el bienestar emocional de las personas mediante
-                información, actividades y herramientas que ayuden a
-                reconocer, expresar y manejar las emociones de manera saludable.
-            </p>
-        </div>
-    </section>
-    <nav>
-        <a href="#">Inicio</a>
-        <a href="#">Misión</a>
-        <a href="#">Autocuidado</a>
-        <a href="#">Mis emociones</a>
-    </nav>
-    <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#mision">Misión</a>
-        <a href="#autocuidado">Autocuidado</a>
-        <a href="#emociones">Mis emociones</a>
-    </nav>
-    <section class="mision" id="mision"></section>
-    <section class="inicio" id="inicio"></section>
+
+    <script>
+        function mostrarSeccion(id) {
+            document.querySelectorAll('.apartado').forEach(function(seccion) {
+                seccion.classList.remove('activo');
+            });
+
+            const destino = document.getElementById(id);
+
+            if (destino) {
+                destino.classList.add('activo');
+            }
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
 </body>
 </html>
